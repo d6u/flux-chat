@@ -1,15 +1,18 @@
 var gulp = require('gulp');
 
-gulp.task('default', ['html', 'css'], function () {
-  gulp.watch('./source/**/*.html', ['html']);
+var copyGlob = [
+  './source/index.html',
+  './source/img/*'
+];
+
+gulp.task('default', ['copy'], function () {
+  gulp.watch(copyGlob, ['copy']);
 });
 
-gulp.task('html', function () {
-  gulp.src('./source/index.html')
+gulp.task('copy', function () {
+  gulp.src(copyGlob, {base: './source'})
     .pipe(gulp.dest('./public'));
-});
 
-gulp.task('css', function () {
   gulp.src(require.resolve('normalize.css'))
     .pipe(gulp.dest('./public'));
 });

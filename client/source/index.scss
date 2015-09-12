@@ -1,3 +1,81 @@
-body {
-  color: red;
+$border-color: #E5E7E9;
+$gray-bg-color: #7F8C8D;
+$blue: #3498DB;
+
+@mixin reset-list() {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.o-app {
+  height: 100vh;
+}
+
+.o-root {
+  height: 100%;
+  display: flex;
+}
+
+.o-friends-list {
+  flex-basis: 400px;
+}
+
+.o-friend-cell {
+  height: 60px;
+  padding: 10px;
+  border-bottom: 1px solid $border-color;
+  &:hover {
+    background-color: $blue;
+    color: white;
+    border-bottom: none;
+    cursor: pointer;
+    .o-friend-cell__unread-count {
+      background-color: white;
+      color: $blue;
+    }
+  }
+}
+
+.o-friend-cell__image {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  vertical-align: middle;
+}
+
+.o-friend-cell__name {
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.o-friend-cell__unread-count {
+  margin-top: (40px - 24px) / 2;
+  float: right;
+  background-color: $blue;
+  height: 24px;
+  min-width: 24px;
+  padding: 0 5px;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 3px;
+  color: white;
+}
+
+.o-conversation {
+  flex-grow: 1;
+  border-left: 1px solid $border-color;
+}
+
+.o-conversation__bg {
+  width: 100%;
+  height: 100%;
+  background-image: url(/img/conversation-icon.svg);
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
