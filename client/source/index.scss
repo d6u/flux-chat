@@ -1,5 +1,4 @@
-$border-color: #E5E7E9;
-$gray-bg-color: #7F8C8D;
+$grey: #E5E7E9;
 $blue: #3498DB;
 
 @mixin reset-list() {
@@ -28,7 +27,7 @@ $blue: #3498DB;
 .o-friend-cell {
   height: 60px;
   padding: 10px;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $grey;
   &:hover {
     background-color: $blue;
     color: white;
@@ -68,7 +67,10 @@ $blue: #3498DB;
 
 .o-conversation {
   flex-grow: 1;
-  border-left: 1px solid $border-color;
+  border-left: 1px solid $grey;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .o-conversation__bg {
@@ -78,4 +80,42 @@ $blue: #3498DB;
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+.o-conversation__messages-list {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.o-conversation__message {
+  margin: 5px;
+  margin-top: 0;
+
+  &--me {
+    .o-conversation__message-text {
+      float: right;
+      background-color: $blue;
+      color: white;
+    }
+  }
+}
+
+.o-conversation__message-text {
+  float: left;
+  background-color: $grey;
+  padding: 5px;
+  border-radius: 3px;
+  max-width: 200px;
+}
+
+.o-conversation__input {
+  border: none;
+  border-top: 1px solid $grey;
+  flex-basis: 50px;
+  resize: none;
+  outline: none;
+  &:focus {
+    border: 1px solid $blue;
+  }
 }
