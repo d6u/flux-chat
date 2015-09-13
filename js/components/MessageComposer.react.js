@@ -11,19 +11,16 @@
  */
 
 import * as Actions from '../actions';
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 let ENTER_KEY_CODE = 13;
 
-let MessageComposer = React.createClass({
+class MessageComposer extends React.Component {
 
-  propTypes: {
-    threadID: React.PropTypes.string.isRequired
-  },
-
-  getInitialState() {
-    return {text: ''};
-  },
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
 
   render() {
     return (
@@ -31,15 +28,15 @@ let MessageComposer = React.createClass({
         className="message-composer"
         name="message"
         value={this.state.text}
-        onChange={this._onChange}
-        onKeyDown={this._onKeyDown}
+        onChange={this._onChange.bind(this)}
+        onKeyDown={this._onKeyDown.bind(this)}
       />
     );
-  },
+  }
 
   _onChange(event, value) {
     this.setState({text: event.target.value});
-  },
+  }
 
   _onKeyDown(event) {
     if (event.keyCode === ENTER_KEY_CODE) {
@@ -52,6 +49,10 @@ let MessageComposer = React.createClass({
     }
   }
 
-});
+};
+
+MessageComposer.propTypes = {
+  threadID: PropTypes.string.isRequired
+};
 
 export default MessageComposer;
