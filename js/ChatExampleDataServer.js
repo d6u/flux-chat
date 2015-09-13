@@ -79,7 +79,7 @@ let messages = [
 export function getMessages(callback) {
   setTimeout(() => {
     callback(messages);
-  }, NETWORK_LATENCY); // Simulate server latency
+  }, NETWORK_LATENCY);
 };
 
 export function postMessage({message, threadName}, callback) {
@@ -98,5 +98,5 @@ export function postMessage({message, threadName}, callback) {
 
   setTimeout(() => {
     callback(createdMessage);
-  }, NETWORK_LATENCY); // Simulate server latency
+  }, NETWORK_LATENCY);
 };
