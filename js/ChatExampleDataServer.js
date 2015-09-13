@@ -15,6 +15,8 @@
  * It uses setTimeout to simulate server latency.
  */
 
+let NETWORK_LATENCY = 100;
+
 let messages = [
   {
     id: 'm_1',
@@ -77,7 +79,7 @@ let messages = [
 export function getMessages(callback) {
   setTimeout(() => {
     callback(messages);
-  }, 100); // Simulate server latency
+  }, NETWORK_LATENCY); // Simulate server latency
 };
 
 export function postMessage({message, threadName}, callback) {
@@ -96,5 +98,5 @@ export function postMessage({message, threadName}, callback) {
 
   setTimeout(() => {
     callback(createdMessage);
-  }, 100); // Simulate server latency
+  }, NETWORK_LATENCY); // Simulate server latency
 };
