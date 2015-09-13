@@ -95,6 +95,6 @@ export function postMessage({message, threadName}, callback) {
   messages.push(createdMessage);
 
   setTimeout(() => {
-    callback();
+    callback(createdMessage);
   }, 100); // Simulate server latency
 };

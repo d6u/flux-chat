@@ -1,6 +1,6 @@
 import ChatAppDispatcher from './dispatcher/ChatAppDispatcher';
 import * as ChatWebAPIUtils from './utils/ChatWebAPIUtils';
-import ChatMessageUtils from './utils/ChatMessageUtils';
+import * as ChatMessageUtils from './utils/ChatMessageUtils';
 import { ActionTypes } from './constants/ChatConstants';
 
 export function createMessage(text, currentThreadID) {

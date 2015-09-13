@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import ChatMessageActionCreators from '../actions/ChatMessageActionCreators';
+import * as Actions from '../actions';
 import React from 'react';
 
 let ENTER_KEY_CODE = 13;
@@ -46,7 +46,7 @@ let MessageComposer = React.createClass({
       event.preventDefault();
       let text = this.state.text.trim();
       if (text) {
-        ChatMessageActionCreators.createMessage(text, this.props.threadID);
+        Actions.createMessage(text, this.props.threadID);
       }
       this.setState({text: ''});
     }

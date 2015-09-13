@@ -20,7 +20,7 @@ export function getAllMessages() {
 };
 
 export function createMessage(message, threadName) {
-  ChatExampleDataServer.postMessage({message, threadName}, () => {
+  ChatExampleDataServer.postMessage({message, threadName}, createdMessage => {
     Actions.receiveCreatedMessage(createdMessage);
   });
 };

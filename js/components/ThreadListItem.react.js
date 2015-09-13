@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import ChatThreadActionCreators from '../actions/ChatThreadActionCreators';
+import * as Actions from '../actions';
 import React from 'react';
 import classNames from 'classnames';
 
@@ -45,7 +45,7 @@ let ThreadListItem = React.createClass({
   },
 
   _onClick() {
-    ChatThreadActionCreators.clickThread(this.props.thread.id);
+    Actions.clickThread(this.props.thread.id);
   }
 
 });
