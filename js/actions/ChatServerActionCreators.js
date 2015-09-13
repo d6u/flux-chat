@@ -10,21 +10,21 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatConstants = require('../constants/ChatConstants');
+import ChatAppDispatcher from '../dispatcher/ChatAppDispatcher';
+import ChatConstants from '../constants/ChatConstants';
 
-var ActionTypes = ChatConstants.ActionTypes;
+let ActionTypes = ChatConstants.ActionTypes;
 
-module.exports = {
+export default {
 
-  receiveAll: function(rawMessages) {
+  receiveAll(rawMessages) {
     ChatAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_MESSAGES,
       rawMessages: rawMessages
     });
   },
 
-  receiveCreatedMessage: function(createdMessage) {
+  receiveCreatedMessage(createdMessage) {
     ChatAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_CREATED_MESSAGE,
       rawMessage: createdMessage

@@ -10,22 +10,22 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatThreadActionCreators = require('../actions/ChatThreadActionCreators');
-var React = require('react');
-var classNames = require('classnames');
+import ChatThreadActionCreators from '../actions/ChatThreadActionCreators';
+import React from 'react';
+import classNames from 'classnames';
 
-var ReactPropTypes = React.PropTypes;
+let ReactPropTypes = React.PropTypes;
 
-var ThreadListItem = React.createClass({
+let ThreadListItem = React.createClass({
 
   propTypes: {
     thread: ReactPropTypes.object,
     currentThreadID: ReactPropTypes.string
   },
 
-  render: function() {
-    var thread = this.props.thread;
-    var lastMessage = thread.lastMessage;
+  render() {
+    let thread = this.props.thread;
+    let lastMessage = thread.lastMessage;
     return (
       <li
         className={classNames({
@@ -44,10 +44,10 @@ var ThreadListItem = React.createClass({
     );
   },
 
-  _onClick: function() {
+  _onClick() {
     ChatThreadActionCreators.clickThread(this.props.thread.id);
   }
 
 });
 
-module.exports = ThreadListItem;
+export default ThreadListItem;

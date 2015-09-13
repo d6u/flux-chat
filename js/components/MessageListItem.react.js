@@ -10,18 +10,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var React = require('react');
+import React from 'react';
 
-var ReactPropTypes = React.PropTypes;
+let ReactPropTypes = React.PropTypes;
 
-var MessageListItem = React.createClass({
+let MessageListItem = React.createClass({
 
   propTypes: {
     message: ReactPropTypes.object
   },
 
-  render: function() {
-    var message = this.props.message;
+  render() {
+    let {message} = this.props;
     return (
       <li className="message-list-item">
         <h5 className="message-author-name">{message.authorName}</h5>
@@ -35,4 +35,4 @@ var MessageListItem = React.createClass({
 
 });
 
-module.exports = MessageListItem;
+export default MessageListItem;

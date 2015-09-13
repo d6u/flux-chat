@@ -10,40 +10,40 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatConstants = require('../constants/ChatConstants');
-var EventEmitter = require('events').EventEmitter;
-var MessageStore = require('../stores/MessageStore');
-var ThreadStore = require('../stores/ThreadStore');
-var assign = require('object-assign');
+import ChatAppDispatcher from '../dispatcher/ChatAppDispatcher';
+import ChatConstants from '../constants/ChatConstants';
+import {EventEmitter} from 'events';
+import MessageStore from '../stores/MessageStore';
+import ThreadStore from '../stores/ThreadStore';
+import assign from 'object-assign';
 
-var ActionTypes = ChatConstants.ActionTypes;
-var CHANGE_EVENT = 'change';
+let ActionTypes = ChatConstants.ActionTypes;
+let CHANGE_EVENT = 'change';
 
-var UnreadThreadStore = assign({}, EventEmitter.prototype, {
+let UnreadThreadStore = assign({}, EventEmitter.prototype, {
 
-  emitChange: function() {
+  emitChange() {
     this.emit(CHANGE_EVENT);
   },
 
   /**
    * @param {function} callback
    */
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   },
 
   /**
    * @param {function} callback
    */
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
-  getCount: function() {
-    var threads = ThreadStore.getAll();
-    var unreadCount = 0;
-    for (var id in threads) {
+  getCount() {
+    let threads = ThreadStore.getAll();
+    let unreadCount = 0;
+    for (let id in threads) {
       if (!threads[id].lastMessage.isRead) {
         unreadCount++;
       }
@@ -53,7 +53,7 @@ var UnreadThreadStore = assign({}, EventEmitter.prototype, {
 
 });
 
-UnreadThreadStore.dispatchToken = ChatAppDispatcher.register(function(action) {
+UnreadThreadStore.dispatchToken = ChatAppDispatcher.register(action => {
   ChatAppDispatcher.waitFor([
     ThreadStore.dispatchToken,
     MessageStore.dispatchToken
@@ -74,4 +74,4 @@ UnreadThreadStore.dispatchToken = ChatAppDispatcher.register(function(action) {
   }
 });
 
-module.exports = UnreadThreadStore;
+export default UnreadThreadStore;

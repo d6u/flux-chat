@@ -10,9 +10,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-module.exports = {
+export default {
 
-  convertRawMessage: function(rawMessage, currentThreadID) {
+  convertRawMessage(rawMessage, currentThreadID) {
     return {
       id: rawMessage.id,
       threadID: rawMessage.threadID,
@@ -23,7 +23,7 @@ module.exports = {
     };
   },
 
-  getCreatedMessageData: function(text, currentThreadID) {
+  getCreatedMessageData(text, currentThreadID) {
     var timestamp = Date.now();
     return {
       id: 'm_' + timestamp,

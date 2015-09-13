@@ -10,22 +10,22 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatConstants = require('../constants/ChatConstants');
-var ChatWebAPIUtils = require('../utils/ChatWebAPIUtils');
-var ChatMessageUtils = require('../utils/ChatMessageUtils');
+import ChatAppDispatcher from '../dispatcher/ChatAppDispatcher';
+import ChatConstants from '../constants/ChatConstants';
+import ChatWebAPIUtils from '../utils/ChatWebAPIUtils';
+import ChatMessageUtils from '../utils/ChatMessageUtils';
 
-var ActionTypes = ChatConstants.ActionTypes;
+let ActionTypes = ChatConstants.ActionTypes;
 
-module.exports = {
+export default {
 
-  createMessage: function(text, currentThreadID) {
+  createMessage(text, currentThreadID) {
     ChatAppDispatcher.dispatch({
       type: ActionTypes.CREATE_MESSAGE,
       text: text,
       currentThreadID: currentThreadID
     });
-    var message = ChatMessageUtils.getCreatedMessageData(text, currentThreadID);
+    let message = ChatMessageUtils.getCreatedMessageData(text, currentThreadID);
     ChatWebAPIUtils.createMessage(message);
   }
 

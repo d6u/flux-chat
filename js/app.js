@@ -12,17 +12,17 @@
 
 // This file bootstraps the entire application.
 
-var ChatApp = require('./components/ChatApp.react');
-var ChatExampleData = require('./ChatExampleData');
-var ChatWebAPIUtils = require('./utils/ChatWebAPIUtils');
-var React = require('react');
-window.React = React; // export for http://fb.me/react-devtools
+import ChatApp from './components/ChatApp.react';
+import ChatExampleData from './ChatExampleData';
+import ChatWebAPIUtils from './utils/ChatWebAPIUtils';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 ChatExampleData.init(); // load example data into localstorage
 
 ChatWebAPIUtils.getAllMessages();
 
-React.render(
-    <ChatApp />,
-    document.getElementById('react')
+ReactDOM.render(
+  <ChatApp />,
+  document.getElementById('react')
 );

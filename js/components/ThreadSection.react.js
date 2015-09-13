@@ -10,11 +10,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var React = require('react');
-var MessageStore = require('../stores/MessageStore');
-var ThreadListItem = require('../components/ThreadListItem.react');
-var ThreadStore = require('../stores/ThreadStore');
-var UnreadThreadStore = require('../stores/UnreadThreadStore');
+import React from 'react';
+import MessageStore from '../stores/MessageStore';
+import ThreadListItem from '../components/ThreadListItem.react';
+import ThreadStore from '../stores/ThreadStore';
+import UnreadThreadStore from '../stores/UnreadThreadStore';
 
 function getStateFromStores() {
   return {
@@ -24,24 +24,24 @@ function getStateFromStores() {
   };
 }
 
-var ThreadSection = React.createClass({
+let ThreadSection = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return getStateFromStores();
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     ThreadStore.addChangeListener(this._onChange);
     UnreadThreadStore.addChangeListener(this._onChange);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     ThreadStore.removeChangeListener(this._onChange);
     UnreadThreadStore.removeChangeListener(this._onChange);
   },
 
-  render: function() {
-    var threadListItems = this.state.threads.map(function(thread) {
+  render() {
+    let threadListItems = this.state.threads.map(function(thread) {
       return (
         <ThreadListItem
           key={thread.id}
@@ -50,7 +50,7 @@ var ThreadSection = React.createClass({
         />
       );
     }, this);
-    var unread =
+    let unread =
       this.state.unreadCount === 0 ?
       null :
       <span>Unread threads: {this.state.unreadCount}</span>;
@@ -69,7 +69,7 @@ var ThreadSection = React.createClass({
   /**
    * Event handler for 'change' events coming from the stores
    */
-  _onChange: function() {
+  _onChange() {
     this.setState(getStateFromStores());
   }
 

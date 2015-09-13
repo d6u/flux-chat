@@ -10,11 +10,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var MessageComposer = require('./MessageComposer.react');
-var MessageListItem = require('./MessageListItem.react');
-var MessageStore = require('../stores/MessageStore');
-var React = require('react');
-var ThreadStore = require('../stores/ThreadStore');
+import MessageComposer from './MessageComposer.react';
+import MessageListItem from './MessageListItem.react';
+import MessageStore from '../stores/MessageStore';
+import React from 'react';
+import ThreadStore from '../stores/ThreadStore';
 
 function getStateFromStores() {
   return {
@@ -32,25 +32,25 @@ function getMessageListItem(message) {
   );
 }
 
-var MessageSection = React.createClass({
+let MessageSection = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return getStateFromStores();
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this._scrollToBottom();
     MessageStore.addChangeListener(this._onChange);
     ThreadStore.addChangeListener(this._onChange);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     MessageStore.removeChangeListener(this._onChange);
     ThreadStore.removeChangeListener(this._onChange);
   },
 
-  render: function() {
-    var messageListItems = this.state.messages.map(getMessageListItem);
+  render() {
+    let messageListItems = this.state.messages.map(getMessageListItem);
     return (
       <div className="message-section">
         <h3 className="message-thread-heading">{this.state.thread.name}</h3>
@@ -62,22 +62,22 @@ var MessageSection = React.createClass({
     );
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
     this._scrollToBottom();
   },
 
-  _scrollToBottom: function() {
-    var ul = this.refs.messageList.getDOMNode();
+  _scrollToBottom() {
+    let ul = this.refs.messageList.getDOMNode();
     ul.scrollTop = ul.scrollHeight;
   },
 
   /**
    * Event handler for 'change' events coming from the MessageStore
    */
-  _onChange: function() {
+  _onChange() {
     this.setState(getStateFromStores());
   }
 
 });
 
-module.exports = MessageSection;
+export default MessageSection;

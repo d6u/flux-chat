@@ -10,24 +10,24 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatConstants = require('../constants/ChatConstants');
-var ChatMessageUtils = require('../utils/ChatMessageUtils');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
+import ChatAppDispatcher from '../dispatcher/ChatAppDispatcher';
+import ChatConstants from '../constants/ChatConstants';
+import ChatMessageUtils from '../utils/ChatMessageUtils';
+import {EventEmitter} from 'events';
+import assign from 'object-assign';
 
-var ActionTypes = ChatConstants.ActionTypes;
-var CHANGE_EVENT = 'change';
+let ActionTypes = ChatConstants.ActionTypes;
+let CHANGE_EVENT = 'change';
 
-var _currentID = null;
-var _threads = {};
+let _currentID = null;
+let _threads = {};
 
-var ThreadStore = assign({}, EventEmitter.prototype, {
+let ThreadStore = assign({}, EventEmitter.prototype, {
 
-  init: function(rawMessages) {
-    rawMessages.forEach(function(message) {
-      var threadID = message.threadID;
-      var thread = _threads[threadID];
+  init(rawMessages) {
+    rawMessages.forEach(message => {
+      let threadID = message.threadID;
+      let thread = _threads[threadID];
       if (thread && thread.lastMessage.timestamp > message.timestamp) {
         return;
       }
@@ -36,49 +36,49 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
         name: message.threadName,
         lastMessage: ChatMessageUtils.convertRawMessage(message, _currentID)
       };
-    }, this);
+    });
 
     if (!_currentID) {
-      var allChrono = this.getAllChrono();
+      let allChrono = this.getAllChrono();
       _currentID = allChrono[allChrono.length - 1].id;
     }
 
     _threads[_currentID].lastMessage.isRead = true;
   },
 
-  emitChange: function() {
+  emitChange() {
     this.emit(CHANGE_EVENT);
   },
 
   /**
    * @param {function} callback
    */
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   },
 
   /**
    * @param {function} callback
    */
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
   /**
    * @param {string} id
    */
-  get: function(id) {
+  get(id) {
     return _threads[id];
   },
 
-  getAll: function() {
+  getAll() {
     return _threads;
   },
 
-  getAllChrono: function() {
-    var orderedThreads = [];
-    for (var id in _threads) {
-      var thread = _threads[id];
+  getAllChrono() {
+    let orderedThreads = [];
+    for (let id in _threads) {
+      let thread = _threads[id];
       orderedThreads.push(thread);
     }
     orderedThreads.sort(function(a, b) {
@@ -92,17 +92,17 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
     return orderedThreads;
   },
 
-  getCurrentID: function() {
+  getCurrentID() {
     return _currentID;
   },
 
-  getCurrent: function() {
+  getCurrent() {
     return this.get(this.getCurrentID());
   }
 
 });
 
-ThreadStore.dispatchToken = ChatAppDispatcher.register(function(action) {
+ThreadStore.dispatchToken = ChatAppDispatcher.register(action => {
 
   switch(action.type) {
 
@@ -123,4 +123,4 @@ ThreadStore.dispatchToken = ChatAppDispatcher.register(function(action) {
 
 });
 
-module.exports = ThreadStore;
+export default ThreadStore;

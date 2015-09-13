@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatServerActionCreators = require('../actions/ChatServerActionCreators');
+import ChatServerActionCreators from '../actions/ChatServerActionCreators';
 
 // !!! Please Note !!!
 // We are using localStorage as an example, but in a real-world scenario, this
@@ -19,23 +19,23 @@ var ChatServerActionCreators = require('../actions/ChatServerActionCreators');
 // the contents of the functions are just trying to simulate client-server
 // communication and server-side processing.
 
-module.exports = {
+export default {
 
-  getAllMessages: function() {
+  getAllMessages() {
     // simulate retrieving data from a database
-    var rawMessages = JSON.parse(localStorage.getItem('messages'));
+    let rawMessages = JSON.parse(localStorage.getItem('messages'));
 
     // simulate success callback
     ChatServerActionCreators.receiveAll(rawMessages);
   },
 
-  createMessage: function(message, threadName) {
+  createMessage(message, threadName) {
     // simulate writing to a database
-    var rawMessages = JSON.parse(localStorage.getItem('messages'));
-    var timestamp = Date.now();
-    var id = 'm_' + timestamp;
-    var threadID = message.threadID || ('t_' + Date.now());
-    var createdMessage = {
+    let rawMessages = JSON.parse(localStorage.getItem('messages'));
+    let timestamp = Date.now();
+    let id = 'm_' + timestamp;
+    let threadID = message.threadID || ('t_' + Date.now());
+    let createdMessage = {
       id: id,
       threadID: threadID,
       threadName: threadName,
@@ -47,7 +47,7 @@ module.exports = {
     localStorage.setItem('messages', JSON.stringify(rawMessages));
 
     // simulate success callback
-    setTimeout(function() {
+    setTimeout(() => {
       ChatServerActionCreators.receiveCreatedMessage(createdMessage);
     }, 0);
   }

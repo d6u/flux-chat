@@ -10,14 +10,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatConstants = require('../constants/ChatConstants');
+import ChatAppDispatcher from '../dispatcher/ChatAppDispatcher';
+import ChatConstants from '../constants/ChatConstants';
 
-var ActionTypes = ChatConstants.ActionTypes;
+let ActionTypes = ChatConstants.ActionTypes;
 
-module.exports = {
+export default {
 
-  clickThread: function(threadID) {
+  clickThread(threadID) {
     ChatAppDispatcher.dispatch({
       type: ActionTypes.CLICK_THREAD,
       threadID: threadID

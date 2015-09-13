@@ -10,9 +10,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-module.exports = {
+export default {
 
-  init: function() {
+  init() {
     localStorage.clear();
     localStorage.setItem('messages', JSON.stringify([
       {

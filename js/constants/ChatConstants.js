@@ -10,9 +10,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var keyMirror = require('keymirror');
+import keyMirror from 'keymirror';
 
-module.exports = {
+export default {
 
   ActionTypes: keyMirror({
     CLICK_THREAD: null,
