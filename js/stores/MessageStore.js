@@ -12,8 +12,8 @@
 
 import ChatAppDispatcher from '../dispatcher/ChatAppDispatcher';
 import ChatConstants from '../constants/ChatConstants';
-import ChatMessageUtils from '../utils/ChatMessageUtils';
-import {EventEmitter} from 'events';
+import * as ChatMessageUtils from '../utils/ChatMessageUtils';
+import { EventEmitter } from 'events';
 import ThreadStore from '../stores/ThreadStore';
 import assign from 'object-assign';
 
