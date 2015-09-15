@@ -103,14 +103,21 @@ MessageStore.dispatchToken = ChatAppDispatcher.register(action => {
       MessageStore.emitChange();
       break;
 
-    case ActionTypes.CREATE_MESSAGE:
-      let message = ChatMessageUtils.getCreatedMessageData(
-        action.text,
-        action.currentThreadID
-      );
+    case ActionTypes.CREATE_MESSAGE: {
+      let message = action.message;
       _messages[message.id] = message;
       MessageStore.emitChange();
       break;
+    }
+
+    case ActionTypes.RECEIVE_RAW_CREATED_MESSAGE: {
+      let { rawMessage, tempMessageID } = action;
+      delete _messages[tempMessageID];
+      let message = ChatMessageUtils.convertRawMessage(rawMessage);
+      _messages[message.id] = message;
+      MessageStore.emitChange();
+      break;
+    }
 
     case ActionTypes.RECEIVE_RAW_MESSAGES:
       _addMessages(action.rawMessages);

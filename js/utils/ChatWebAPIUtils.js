@@ -19,8 +19,8 @@ export function getAllMessages() {
   });
 };
 
-export function createMessage(message, threadName) {
-  ChatExampleDataServer.postMessage({message, threadName}, createdMessage => {
-    Actions.receiveCreatedMessage(createdMessage);
+export function createMessage(message) {
+  ChatExampleDataServer.postMessage(message, createdMessage => {
+    Actions.receiveCreatedMessage(createdMessage, message.id);
   });
 };
