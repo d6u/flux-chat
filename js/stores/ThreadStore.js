@@ -112,6 +112,22 @@ ThreadStore.dispatchToken = ChatAppDispatcher.register(action => {
       ThreadStore.emitChange();
       break;
 
+    case ActionTypes.CREATE_MESSAGE: {
+      let message = action.message;
+      _threads[message.threadID].lastMessage = message;
+      ThreadStore.emitChange();
+      break;
+    }
+
+    case ActionTypes.RECEIVE_RAW_CREATED_MESSAGE: {
+      let rawMessage = action.rawMessage;
+      let currentThreadID = ThreadStore.getCurrentID();
+      let message = ChatMessageUtils.convertRawMessage(rawMessage, currentThreadID);
+      _threads[message.threadID].lastMessage = message;
+      ThreadStore.emitChange();
+      break;
+    }
+
     case ActionTypes.RECEIVE_RAW_MESSAGES:
       ThreadStore.init(action.rawMessages);
       ThreadStore.emitChange();
